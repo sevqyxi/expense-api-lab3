@@ -1,0 +1,20 @@
+info:
+  name: Filter by user_id and category_id
+  type: http
+  seq: 7
+http:
+  method: GET
+  url: '{{baseUrl}}/record?user_id={{userId}}&category_id={{personalCategoryId}}'
+  params:
+  - name: user_id
+    value: '{{userId}}'
+    type: query
+  - name: category_id
+    value: '{{personalCategoryId}}'
+    type: query
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '200'

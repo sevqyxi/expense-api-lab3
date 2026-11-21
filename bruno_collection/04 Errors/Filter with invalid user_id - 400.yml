@@ -1,0 +1,17 @@
+info:
+  name: Filter with invalid user_id - 400
+  type: http
+  seq: 18
+http:
+  method: GET
+  url: '{{baseUrl}}/record?user_id=abc'
+  params:
+  - name: user_id
+    value: abc
+    type: query
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '400'

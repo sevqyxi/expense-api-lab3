@@ -1,0 +1,13 @@
+info:
+  name: Delete global category
+  type: http
+  seq: 5
+http:
+  method: DELETE
+  url: '{{baseUrl}}/category/{{globalCategoryId}}'
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '204'

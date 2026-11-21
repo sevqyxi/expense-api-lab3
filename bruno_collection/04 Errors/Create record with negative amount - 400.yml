@@ -1,0 +1,21 @@
+info:
+  name: Create record with negative amount - 400
+  type: http
+  seq: 14
+http:
+  method: POST
+  url: '{{baseUrl}}/record'
+  body:
+    type: json
+    data: |-
+      {
+        "user_id": {{userId}},
+        "category_id": {{globalCategoryId}},
+        "amount": -50
+      }
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '400'

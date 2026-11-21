@@ -1,0 +1,26 @@
+info:
+  name: Get categories available to user
+  type: http
+  seq: 5
+http:
+  method: GET
+  url: '{{baseUrl}}/category?user_id={{userId}}'
+  params:
+  - name: user_id
+    value: '{{userId}}'
+    type: query
+  auth: inherit
+runtime:
+  scripts:
+  - type: tests
+    code: |-
+      test("global + own personal, without other user's personal", function () {
+        const ids = res.body.map(function (c) { return c.id; });
+        expect(ids).to.include(Number(bru.getVar("globalCategoryId")));
+        expect(ids).to.include(Number(bru.getVar("personalCategoryId")));
+        expect(ids).to.not.include(Number(bru.getVar("otherCategoryId")));
+      });
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '200'

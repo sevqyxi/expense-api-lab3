@@ -1,0 +1,22 @@
+info:
+  name: Create record with created_at
+  type: http
+  seq: 3
+http:
+  method: POST
+  url: '{{baseUrl}}/record'
+  body:
+    type: json
+    data: |-
+      {
+        "user_id": {{userId}},
+        "category_id": {{globalCategoryId}},
+        "amount": 99.99,
+        "created_at": "2026-11-18T12:30:00+02:00"
+      }
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '201'

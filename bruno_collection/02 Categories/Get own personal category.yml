@@ -1,0 +1,17 @@
+info:
+  name: Get own personal category
+  type: http
+  seq: 6
+http:
+  method: GET
+  url: '{{baseUrl}}/category/{{personalCategoryId}}?user_id={{userId}}'
+  params:
+  - name: user_id
+    value: '{{userId}}'
+    type: query
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '200'

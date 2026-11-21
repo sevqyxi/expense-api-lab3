@@ -1,0 +1,24 @@
+info:
+  name: Create personal category of second user
+  type: http
+  seq: 3
+http:
+  method: POST
+  url: '{{baseUrl}}/category'
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Olena travel",
+        "user_id": {{otherUserId}}
+      }
+  auth: inherit
+runtime:
+  scripts:
+  - type: after-response
+    code: |-
+      bru.setVar("otherCategoryId", res.body.id);
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '201'

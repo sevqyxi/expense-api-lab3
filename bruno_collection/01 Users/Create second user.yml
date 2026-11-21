@@ -1,0 +1,23 @@
+info:
+  name: Create second user
+  type: http
+  seq: 2
+http:
+  method: POST
+  url: '{{baseUrl}}/user'
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Olena Kovalenko"
+      }
+  auth: inherit
+runtime:
+  scripts:
+  - type: after-response
+    code: |-
+      bru.setVar("otherUserId", res.body.id);
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '201'

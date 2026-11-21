@@ -1,0 +1,20 @@
+info:
+  name: Create personal category for unknown user - 404
+  type: http
+  seq: 11
+http:
+  method: POST
+  url: '{{baseUrl}}/category'
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Ghost",
+        "user_id": 9999
+      }
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '404'

@@ -1,0 +1,13 @@
+info:
+  name: Delete category not found - 404
+  type: http
+  seq: 4
+http:
+  method: DELETE
+  url: '{{baseUrl}}/category/{{personalCategoryId}}'
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '404'

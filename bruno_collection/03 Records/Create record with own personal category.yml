@@ -1,0 +1,21 @@
+info:
+  name: Create record with own personal category
+  type: http
+  seq: 2
+http:
+  method: POST
+  url: '{{baseUrl}}/record'
+  body:
+    type: json
+    data: |-
+      {
+        "user_id": {{userId}},
+        "category_id": {{personalCategoryId}},
+        "amount": 1200
+      }
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '201'

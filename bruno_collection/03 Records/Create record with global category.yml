@@ -1,0 +1,25 @@
+info:
+  name: Create record with global category
+  type: http
+  seq: 1
+http:
+  method: POST
+  url: '{{baseUrl}}/record'
+  body:
+    type: json
+    data: |-
+      {
+        "user_id": {{userId}},
+        "category_id": {{globalCategoryId}},
+        "amount": 250.50
+      }
+  auth: inherit
+runtime:
+  scripts:
+  - type: after-response
+    code: |-
+      bru.setVar("recordId", res.body.id);
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '201'

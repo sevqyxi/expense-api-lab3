@@ -1,0 +1,19 @@
+info:
+  name: Get global categories
+  type: http
+  seq: 4
+http:
+  method: GET
+  url: '{{baseUrl}}/category'
+  auth: inherit
+runtime:
+  scripts:
+  - type: tests
+    code: |-
+      test("only global categories", function () {
+        res.body.forEach(function (c) { expect(c.user_id).to.equal(null); });
+      });
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '200'

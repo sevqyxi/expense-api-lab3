@@ -1,0 +1,13 @@
+info:
+  name: Delete second user
+  type: http
+  seq: 6
+http:
+  method: DELETE
+  url: '{{baseUrl}}/user/{{otherUserId}}'
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '204'

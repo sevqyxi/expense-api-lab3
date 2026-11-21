@@ -1,0 +1,19 @@
+info:
+  name: Create user with invalid name type - 400
+  type: http
+  seq: 9
+http:
+  method: POST
+  url: '{{baseUrl}}/user'
+  body:
+    type: json
+    data: |-
+      {
+        "name": 123
+      }
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '400'

@@ -1,0 +1,17 @@
+info:
+  name: Create category without name - 400
+  type: http
+  seq: 10
+http:
+  method: POST
+  url: '{{baseUrl}}/category'
+  body:
+    type: json
+    data: |-
+      {}
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '400'

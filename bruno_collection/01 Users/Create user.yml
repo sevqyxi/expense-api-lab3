@@ -1,0 +1,23 @@
+info:
+  name: Create user
+  type: http
+  seq: 1
+http:
+  method: POST
+  url: '{{baseUrl}}/user'
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Ivan Petrenko"
+      }
+  auth: inherit
+runtime:
+  scripts:
+  - type: after-response
+    code: |-
+      bru.setVar("userId", res.body.id);
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '201'

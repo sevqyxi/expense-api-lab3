@@ -1,0 +1,17 @@
+info:
+  name: Filter by category_id
+  type: http
+  seq: 6
+http:
+  method: GET
+  url: '{{baseUrl}}/record?category_id={{globalCategoryId}}'
+  params:
+  - name: category_id
+    value: '{{globalCategoryId}}'
+    type: query
+  auth: inherit
+runtime:
+  assertions:
+  - expression: res.status
+    operator: eq
+    value: '200'
